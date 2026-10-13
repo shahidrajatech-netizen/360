@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile | LIBRARY 360</title>
+<style>
+
+
+:root {
+    --black: #171715;
+    --cream: #f3f0e8;
+    --paper: #faf9f4;
+    --line: #d9d5ca;
+    --muted: #77746c;
+    --sidebar: #ebe7dd;
+    --sidebar-width: 270px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    min-height: 100vh;
+    background: var(--cream);
+    color: var(--black);
+    font-family: "DM Sans", sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.student-layout {
+    min-height: 100vh;
+    display: block;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* LEFT SIDE */
+ .sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: var(--sidebar);
+    border-right: 1px solid var(--line);
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1000;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 55px;
+}
+
+.logo-mark {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Playfair Display", serif;
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.logo-name {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.library-text {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.number-text {
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.sidebar-nav {
+    flex: 1;
+}
+
+.nav-section {
+    margin-bottom: 28px;
+}
+
+.nav-heading {
+    margin-bottom: 9px;
+    font-family: "DM Mono", monospace;
+    font-size: 8px;
+    letter-spacing: 1.7px;
+    color: var(--muted);
+}
+
+.nav-link {
+    min-height: 40px;
+    padding: 0 11px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    border-left: 2px solid transparent;
+    color: #55534d;
+    font-size: 13px;
+}
+
+.nav-link:hover {
+    background: rgba(23,23,21,.05);
+    color: var(--black);
+}
+
+.nav-link.active {
+    background: var(--black);
+    color: var(--paper);
+}
+
+.nav-icon {
+    width: 18px;
+    text-align: center;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+/* RIGHT SIDE */
+ .main-content {
+    position: relative;
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+    min-width: 0;
+    min-height: 100vh;
+    padding: 0 55px 70px;
+    overflow-x: hidden;
+}
+
+.topbar {
+    height: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+}
+
+.topbar-search {
+    width: 360px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--line);
+    padding: 10px 0;
+}
+
+.topbar-search input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--black);
+}
+
+.search-icon {
+    color: var(--muted);
+}
+
+.topbar-account {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.account-avatar {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "DM Mono", monospace;
+}
+
+.account-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.account-info strong {
+    font-size: 12px;
+}
+
+.account-info span {
+    font-family: "DM Mono", monospace;
+    font-size: 8px;
+    color: var(--muted);
+}
+
+.welcome-section {
+    padding: 58px 0 45px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.section-label {
+    margin-bottom: 11px;
+    font-family: "DM Mono", monospace;
+    font-size: 8px;
+    letter-spacing: 1.8px;
+    color: var(--muted);
+}
+
+.welcome-section h1,
+.section-header h2,
+.panel h2,
+.explore-card h3,
+.request-cta h2 {
+    font-family: "Playfair Display", serif;
+    font-weight: 500;
+}
+
+.welcome-section h1 {
+    font-size: clamp(42px,5vw,68px);
+    line-height: .95;
+}
+
+.welcome-description {
+    max-width: 500px;
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.request-button,
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    padding: 14px 18px;
+    background: var(--black);
+    color: var(--paper);
+    font-family: "DM Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.stat-card {
+    min-height: 150px;
+    padding: 20px;
+    border-right: 1px solid var(--line);
+}
+
+.stat-card:last-child {
+    border-right: 0;
+}
+
+.stat-card.highlight {
+    background: var(--black);
+    color: var(--paper);
+}
+
+.stat-number {
+    display: block;
+    margin-top: 28px;
+    font-family: "Playfair Display", serif;
+    font-size: 42px;
+}
+
+.stat-card p {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.content-section {
+    padding-top: 70px;
+}
+
+.section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.section-header h2,
+.panel h2 {
+    font-size: 32px;
+}
+
+.text-link,
+.small-link {
+    font-family: "DM Mono", monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: var(--muted);
+}
+
+.empty-state,
+.history-empty,
+.panel-empty {
+    min-height: 130px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.dashboard-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    padding-top: 70px;
+}
+
+.panel {
+    border: 1px solid var(--line);
+    padding: 25px;
+    background: var(--paper);
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+}
+
+.panel-empty {
+    border-top: 0;
+    min-height: 110px;
+}
+
+.panel-link {
+    display: block;
+    margin-top: 20px;
+    font-family: "DM Mono", monospace;
+    font-size: 8px;
+}
+
+.explore-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+}
+
+.explore-card {
+    min-height: 160px;
+    padding: 20px;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.explore-card h3 {
+    font-size: 21px;
+}
+
+.explore-card p {
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.explore-card > strong {
+    align-self: flex-end;
+}
+
+.request-cta {
+    margin-top: 70px;
+    padding: 38px 42px;
+    background: var(--black);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.request-cta h2 {
+    font-size: clamp(27px,4vw,43px);
+}
+
+.cta-button {
+    background: var(--paper);
+    color: var(--black);
+}
+
+@media (max-width: 1100px) {
+    .main-content {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-columns,
+    .explore-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    :root { --sidebar-width: 230px; }
+
+    .sidebar {
+        width: var(--sidebar-width);
+        padding: 24px 16px;
+    }
+
+    .main-content {
+        width: calc(100% - var(--sidebar-width));
+        margin-left: var(--sidebar-width);
+        padding: 0 18px 40px;
+    }
+    .welcome-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .topbar-search { width: 45%; }
+    .account-info { display: none; }
+    .request-cta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    :root { --sidebar-width: 205px; }
+
+    .sidebar {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .logo {
+        gap: 7px;
+    }
+
+    .library-text {
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+    .number-text {
+        font-size: 21px;
+    }
+
+    .main-content {
+        width: calc(100% - var(--sidebar-width));
+        margin-left: var(--sidebar-width);
+    }
+
+    .stats-grid { grid-template-columns: 1fr; }
+    .stat-card {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+    }
+}
+
+
+.mybooks-intro { padding: 55px 0 38px; }
+.mybooks-intro h1 { font-family:"Playfair Display",serif; font-size:clamp(42px,5vw,62px); font-weight:500; line-height:1; }
+.mybooks-intro p.description { margin-top:15px; color:var(--muted); font-size:13px; line-height:1.7; }
+.book-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.book-stat { min-height:125px; padding:20px; border-right:1px solid var(--line); }
+.book-stat:last-child { border-right:0; }
+.book-stat .number { display:block; margin-top:18px; font-family:"Playfair Display",serif; font-size:38px; }
+.book-stat p { font-size:12px; color:var(--muted); margin-top:5px; }
+.book-stat.dark { background:var(--black); color:var(--paper); }
+.book-stat.dark p { color:#c7c3b9; }
+.books-section { padding-top:55px; }
+.books-table-wrap { width:100%; overflow-x:auto; border-top:1px solid var(--line); }
+.books-table { width:100%; border-collapse:collapse; min-width:650px; text-align:left; }
+.books-table th { padding:16px 14px; font-family:"DM Mono",monospace; font-size:9px; font-weight:500; letter-spacing:1px; color:var(--muted); border-bottom:1px solid var(--line); }
+.books-table td { padding:18px 14px; font-size:12px; border-bottom:1px solid var(--line); }
+.books-empty { padding:42px 20px; border-bottom:1px solid var(--line); text-align:center; background:var(--paper); }
+.books-empty .book-icon { font-size:28px; margin-bottom:12px; }
+.books-empty h3 { font-family:"Playfair Display",serif; font-weight:500; font-size:25px; }
+.books-empty p { color:var(--muted); font-size:12px; margin:10px auto 20px; line-height:1.7; max-width:390px; }
+.browse-btn { display:inline-flex; padding:13px 17px; background:var(--black); color:var(--paper); font-family:"DM Mono",monospace; font-size:9px; letter-spacing:1px; }
+.page-note { margin-top:24px; font-size:11px; color:var(--muted); line-height:1.7; }
+@media(max-width:1100px) { .main-content { padding-left:32px; padding-right:32px; } }
+@media(max-width:700px) {
+ :root { --sidebar-width:230px; }
+ .sidebar { width:var(--sidebar-width); padding:24px 16px; }
+ .main-content { width:calc(100% - var(--sidebar-width)); margin-left:var(--sidebar-width); padding:0 18px 40px; }
+ .topbar-search { width:45%; }
+ .account-info { display:none; }
+ .book-stats { grid-template-columns:1fr; }
+ .book-stat { border-right:0; border-bottom:1px solid var(--line); }
+ .book-stat:last-child { border-bottom:0; }
+}
+@media(max-width:480px) {
+ :root { --sidebar-width:205px; }
+ .sidebar { padding-left:12px; padding-right:12px; }
+ .logo { gap:7px; }
+ .library-text { font-size:12px; letter-spacing:1px; }
+ .number-text { font-size:21px; }
+ .main-content { width:calc(100% - var(--sidebar-width)); margin-left:var(--sidebar-width); }
+}
+
+.profile-intro { padding:55px 0 38px; }
+.profile-intro h1 { font-family:"Playfair Display",serif; font-size:clamp(42px,5vw,62px); font-weight:500; line-height:1; }
+.profile-intro .description { margin-top:15px; color:var(--muted); font-size:13px; line-height:1.7; }
+.profile-section { padding:28px; background:var(--paper); border:1px solid var(--line); }
+.profile-section-header { padding-bottom:20px; margin-bottom:25px; border-bottom:1px solid var(--line); }
+.profile-section-header h2 { font-family:"Playfair Display",serif; font-size:30px; font-weight:500; }
+.profile-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px 28px; }
+.profile-field label { display:block; margin-bottom:9px; font-family:"DM Mono",monospace; font-size:9px; letter-spacing:1px; color:var(--muted); }
+.profile-field input { width:100%; min-height:46px; padding:12px 13px; border:1px solid var(--line); background:transparent; color:var(--black); font:13px "DM Sans",sans-serif; outline:none; }
+.profile-field input:focus { border-color:var(--black); }
+.profile-actions { display:flex; justify-content:flex-end; gap:12px; margin-top:28px; padding-top:22px; border-top:1px solid var(--line); }
+.profile-button { min-height:43px; padding:0 18px; border:1px solid var(--black); background:transparent; color:var(--black); font:9px "DM Mono",monospace; letter-spacing:1px; cursor:pointer; }
+.profile-button.primary { background:var(--black); color:var(--paper); }
+@media(max-width:700px) { .profile-grid { grid-template-columns:1fr; } .profile-section { padding:20px; } .profile-actions { flex-wrap:wrap; } }
+</style>
+</head>
+<body>
+<div class="student-layout">
+<aside class="sidebar">
+
+        <a href="student_dashboard.html" class="logo">
+            <div class="logo-mark">L</div>
+
+            <div class="logo-name">
+                <span class="library-text">LIBRARY</span>
+                <span class="number-text">360</span>
+            </div>
+        </a>
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section">
+                <p class="nav-heading">OVERVIEW</p>
+
+                <a href="student_dashboard.html" class="nav-link">
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+                </a>
+            </div>
+
+
+            <div class="nav-section">
+
+                <p class="nav-heading">LIBRARY</p>
+
+                <a href="findbook student.html" class="nav-link">
+                    <span class="nav-icon">▦</span>
+                    <span>Browse Books</span>
+                </a>
+
+               
+
+            </div>
+
+
+            <div class="nav-section">
+
+                <p class="nav-heading">MY LIBRARY</p>
+
+                <a href="my-books.html" class="nav-link">
+                    <span class="nav-icon">▣</span>
+                    <span>My Books</span>
+                </a>
+
+                <a href="history.html" class="nav-link">
+                    <span class="nav-icon">≡</span>
+                    <span>Borrowing History</span>
+                </a>
+
+                <a href="track-status.html" class="nav-link">
+                    <span class="nav-icon">◉</span>
+                    <span>Track Status</span>
+                </a>
+
+            </div>
+
+
+            <div class="nav-section">
+
+                <p class="nav-heading">REQUESTS</p>
+
+                <a href="request-book.html" class="nav-link">
+                    <span class="nav-icon">+</span>
+                    <span>Request New Book</span>
+                </a>
+
+            </div>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <p class="nav-heading">ACCOUNT</p>
+
+            <a href="profile.html" class="nav-link active">
+                <span class="nav-icon">◎</span>
+                <span>Profile</span>
+            </a>
+
+           
+
+            <a href="home.html" class="nav-link logout">
+                <span class="nav-icon">↪</span>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
+    </aside>
+<main class="main-content">
+<header class="topbar">
+    <div class="topbar-search"><span class="search-icon">⌕</span><input type="search" placeholder="Search your library..." aria-label="Search library"></div>
+    <div class="topbar-account"><div class="account-avatar">U</div><div class="account-info"><strong>Student</strong></div></div>
+</header>
+<section class="profile-intro">
+    <p class="section-label">STUDENT PORTAL</p>
+    <h1>My Profile</h1>
+    <p class="description">View and manage your personal information.</p>
+</section>
+<section class="profile-section">
+    <div class="profile-section-header"><p class="section-label">YOUR ACCOUNT</p><h2>Personal Information</h2></div>
+    <form action="#" method="post">
+        <div class="profile-grid">
+            <div class="profile-field"><label for="full-name">FULL NAME</label><input id="full-name" name="full_name" type="text" placeholder="Enter your full name"></div>
+            <div class="profile-field"><label for="student-id">STUDENT ID</label><input id="student-id" name="student_id" type="text" placeholder="Enter your student ID"></div>
+            <div class="profile-field"><label for="email">EMAIL ADDRESS</label><input id="email" name="email" type="email" placeholder="Enter your email address"></div>
+            <div class="profile-field"><label for="phone">PHONE NUMBER</label><input id="phone" name="phone" type="tel" placeholder="Enter your phone number"></div>
+            <div class="profile-field"><label for="course">COURSE / DEPARTMENT</label><input id="course" name="course" type="text" placeholder="Enter your course or department"></div>
+            <div class="profile-field"><label for="semester">YEAR / SEMESTER</label><input id="semester" name="semester" type="text" placeholder="Enter your year or semester"></div>
+        </div>
+        <div class="profile-actions"><button class="profile-button" type="reset">CANCEL</button><button class="profile-button primary" type="submit">SAVE CHANGES ↗</button></div>
+    </form>
+</section>
+</main>
+</div>
+</body>
+</html>

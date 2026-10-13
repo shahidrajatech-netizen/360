@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Members | LIBRARY 360</title>
+
+    <style>
+      :root {
+        --black: #171715;
+        --cream: #f3f0e8;
+        --paper: #faf9f4;
+        --line: #d9d5ca;
+        --muted: #77746c;
+        --sidebar: #ebe7dd;
+        --sidebar-width: 270px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        background: var(--cream);
+        color: var(--black);
+        font-family: "DM Sans", sans-serif;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: var(--sidebar-width);
+        padding: 30px 24px;
+        background: var(--sidebar);
+        border-right: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+      }
+
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 55px;
+        white-space: nowrap;
+      }
+
+      .logo-mark {
+        width: 44px;
+        height: 44px;
+        border: 1px solid var(--black);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Playfair Display", serif;
+        font-size: 23px;
+        font-weight: 600;
+      }
+
+      .logo-name {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+
+      .library-text {
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+      }
+
+      .number-text {
+        font-size: 25px;
+        font-weight: 700;
+      }
+
+      .sidebar-nav {
+        flex: 1;
+      }
+
+      .nav-section {
+        margin-bottom: 28px;
+      }
+
+      .nav-heading {
+        margin-bottom: 9px;
+        color: var(--muted);
+        font-family: "DM Mono", monospace;
+        font-size: 8px;
+        letter-spacing: 1.7px;
+      }
+
+      .nav-link {
+        min-height: 40px;
+        padding: 0 11px;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        border-left: 2px solid transparent;
+        color: #55534d;
+        font-size: 13px;
+      }
+
+      .nav-link:hover {
+        background: rgba(23, 23, 21, 0.05);
+        color: var(--black);
+      }
+
+      .nav-link.active {
+        background: var(--black);
+        color: var(--paper);
+      }
+
+      .nav-icon {
+        width: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .sidebar-bottom {
+        margin-top: auto;
+      }
+
+      .main-content {
+        margin-left: var(--sidebar-width);
+        width: calc(100% - var(--sidebar-width));
+        min-height: 100vh;
+        padding: 0 55px 70px;
+      }
+
+      .topbar {
+        height: 82px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .search-box {
+        width: 370px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .search-icon {
+        color: var(--muted);
+        font-size: 19px;
+      }
+
+      .search-box input {
+        width: 100%;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: var(--black);
+        font-size: 13px;
+      }
+
+      .admin-account {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .admin-avatar {
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--black);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "DM Mono", monospace;
+        font-size: 11px;
+      }
+
+      .admin-info strong {
+        font-size: 12px;
+      }
+
+      .page-header {
+        padding: 58px 0 40px;
+      }
+
+      .section-label {
+        margin-bottom: 11px;
+        color: var(--muted);
+        font-family: "DM Mono", monospace;
+        font-size: 8px;
+        letter-spacing: 1.8px;
+      }
+
+      .page-header h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(42px, 5vw, 65px);
+        font-weight: 500;
+        line-height: 0.95;
+        letter-spacing: -2px;
+      }
+
+      .page-description {
+        max-width: 500px;
+        margin-top: 18px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .members-section {
+        width: 100%;
+        border: 1px solid var(--line);
+        background: var(--paper);
+      }
+
+      .members-header {
+        padding: 22px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .members-header h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 28px;
+        font-weight: 500;
+      }
+
+      .member-count {
+        color: var(--muted);
+        font-family: "DM Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+
+      .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      .member-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .member-table th {
+        padding: 14px 18px;
+        text-align: left;
+        color: var(--muted);
+        font-family: "DM Mono", monospace;
+        font-size: 8px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        border-bottom: 1px solid var(--line);
+        white-space: nowrap;
+      }
+
+      .member-table td {
+        padding: 17px 18px;
+        font-size: 11px;
+        border-bottom: 1px solid var(--line);
+        white-space: nowrap;
+      }
+
+      .member-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .member-name {
+        font-weight: 600;
+      }
+      .member-email {
+        color: var(--muted);
+      }
+
+      .status {
+        display: inline-block;
+        padding: 6px 9px;
+        border: 1px solid var(--line);
+        font-family: "DM Mono", monospace;
+        font-size: 7px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .status.active {
+        background: var(--black);
+        color: var(--paper);
+      }
+
+      .status.inactive {
+        color: var(--muted);
+      }
+
+      .empty {
+        padding: 70px 20px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 950px) {
+        :root {
+          --sidebar-width: 220px;
+        }
+        .main-content {
+          padding: 0 30px 50px;
+        }
+        .search-box {
+          width: 280px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .sidebar {
+          display: none;
+        }
+        .main-content {
+          width: 100%;
+          margin-left: 0;
+          padding: 0 18px 40px;
+        }
+        .search-box {
+          width: 50%;
+        }
+        .admin-info {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <aside class="sidebar">
+      <a href="admin-dashboard.html" class="logo">
+        <div class="logo-mark">L</div>
+        <div class="logo-name">
+          <span class="library-text">LIBRARY</span>
+          <span class="number-text">360</span>
+        </div>
+      </a>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <p class="nav-heading">OVERVIEW</p>
+
+          <a href="admin_dashboard.html" class="nav-link">
+            <span class="nav-icon">▦</span>
+            <span>Dashboard</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-heading">LIBRARY</p>
+
+          <a href="findbook admin.html" class="nav-link">
+            <span class="nav-icon">▦</span>
+            <span>Books</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-heading">MANAGEMENT</p>
+
+          <a href="admin-members.html" class="nav-link active">
+            <span class="nav-icon">◎</span>
+            <span>Members</span>
+          </a>
+
+          <a href="admin-lending.html" class="nav-link">
+            <span class="nav-icon">↗</span>
+            <span>Lending</span>
+          </a>
+
+          <a href="admin-returns.html" class="nav-link">
+            <span class="nav-icon">↩</span>
+            <span>Returns</span>
+          </a>
+
+          <a href="admin-transactions.html" class="nav-link">
+            <span class="nav-icon">≡</span>
+            <span>Transactions</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-heading">INSIGHTS</p>
+
+          <a href="admin-reports.html" class="nav-link">
+            <span class="nav-icon">▥</span>
+            <span>Reports</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <p class="nav-heading">SYSTEM</p>
+
+        <a href="index.html" class="nav-link">
+          <span class="nav-icon">↪</span>
+          <span>Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="search-box">
+          <span class="search-icon">⌕</span>
+
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search members..."
+            aria-label="Search members"
+          />
+        </div>
+
+        <div class="admin-account">
+          <div class="admin-avatar">A</div>
+
+          <div class="admin-info">
+            <strong>Administrator</strong>
+          </div>
+        </div>
+      </header>
+
+      <section class="page-header">
+        <p class="section-label">MANAGEMENT</p>
+
+        <h1>Members</h1>
+
+        <p class="page-description">
+          View and manage all students registered in the library.
+        </p>
+      </section>
+
+      <section class="members-section">
+        <div class="members-header">
+          <h2>Student Members</h2>
+
+          <span class="member-count" id="memberCount"> LOADING... </span>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="member-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>MEMBER</th>
+                <th>EMAIL</th>
+                <th>ROLL NUMBER</th>
+                <th>CLASS</th>
+                <th>SECTION</th>
+                <th>BRANCH</th>
+                <th>PHONE</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+
+            <tbody id="memberTableBody">
+              <tr>
+                <td colspan="9">
+                  <div class="empty">Loading members...</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script type="module">
+      const API_URL = "../api/student-list.php";
+
+      const tableBody = document.getElementById("memberTableBody");
+      const memberCount = document.getElementById("memberCount");
+      const searchInput = document.getElementById("searchInput");
+
+      let members = [];
+
+      async function loadMembers() {
+        try {
+          const response = await fetch(API_URL);
+
+          if (!response.ok) {
+            throw new Error("API request failed");
+          }
+
+          const result = await response.json();
+
+          if (!result.success) {
+            throw new Error("Unable to load members");
+          }
+
+          members = result.data || [];
+
+          renderMembers(members);
+        } catch (error) {
+          console.error(error);
+
+          memberCount.textContent = "ERROR";
+
+          tableBody.innerHTML = `
+            <tr>
+                <td colspan="9">
+                    <div class="empty">
+                        Unable to load members.
+                    </div>
+                </td>
+            </tr>
+        `;
+        }
+      }
+
+      function renderMembers(data) {
+        memberCount.textContent = data.length + " MEMBERS";
+
+        if (data.length === 0) {
+          tableBody.innerHTML = `
+            <tr>
+                <td colspan="9">
+                    <div class="empty">
+                        No student members found.
+                    </div>
+                </td>
+            </tr>
+        `;
+
+          return;
+        }
+
+        tableBody.innerHTML = data
+          .map((member) => {
+            const status = String(member.status ?? "").toLowerCase();
+
+            return `
+            <tr>
+
+                <td>${member.Id ?? ""}</td>
+
+                <td class="member-name">
+                    ${member.Name ?? ""}
+                </td>
+
+                <td class="member-email">
+                    ${member.Email ?? ""}
+                </td>
+
+                <td>
+                    ${member.roll_number ?? ""}
+                </td>
+
+                <td>
+                    ${member.class ?? ""}
+                </td>
+
+                <td>
+                    ${member.section ?? ""}
+                </td>
+
+                <td>
+                    ${member.branch ?? ""}
+                </td>
+
+                <td>
+                    ${member.phone ?? ""}
+                </td>
+
+                <td>
+                    <span class="status ${status === "active" ? "active" : "inactive"}">
+                        ${member.status ?? "Unknown"}
+                    </span>
+                </td>
+
+            </tr>
+        `;
+          })
+          .join("");
+      }
+
+      searchInput.addEventListener("input", function () {
+        const value = this.value.toLowerCase().trim();
+
+        const filtered = members.filter((member) => {
+          return [
+            member.Id,
+            member.Name,
+            member.Email,
+            member.roll_number,
+            member.class,
+            member.section,
+            member.branch,
+            member.phone,
+            member.status,
+          ].some((valueToSearch) =>
+            String(valueToSearch ?? "")
+              .toLowerCase()
+              .includes(value),
+          );
+        });
+
+        renderMembers(filtered);
+      });
+
+      await loadMembers();
+    </script>
+  </body>
+</html>

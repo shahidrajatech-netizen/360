@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Returns | LIBRARY 360</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap');
+
+        :root {
+            --black: #171715;
+            --cream: #f3f0e8;
+            --paper: #faf9f4;
+            --line: #d9d5ca;
+            --muted: #77746c;
+            --sidebar: #ebe7dd;
+            --sidebar-width: 270px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            background: var(--cream);
+            color: var(--black);
+            font-family: "DM Sans", sans-serif;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        input, button { font: inherit; }
+
+        .sidebar {
+            position: fixed;
+            inset: 0 auto 0 0;
+            width: var(--sidebar-width);
+            padding: 30px 24px;
+            background: var(--sidebar);
+            border-right: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        /* LOGO — same as the admin dashboard */
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 85px;
+            white-space: nowrap;
+        }
+
+        .logo-mark {
+            width: 68px;
+            height: 69px;
+            flex-shrink: 0;
+            border: 1px solid var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Playfair Display", serif;
+            font-size: 34px;
+            font-weight: 600;
+        }
+
+        .logo-name {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .library-text {
+            font-size: 23px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .number-text {
+            font-size: 38px;
+            font-weight: 700;
+        }
+        .sidebar-nav { flex: 1; }
+        .nav-section { margin-bottom: 28px; }
+        .nav-heading {
+            margin-bottom: 9px;
+            color: var(--muted);
+            font: 8px "DM Mono", monospace;
+            letter-spacing: 1.7px;
+        }
+
+        .nav-link {
+            min-height: 40px;
+            padding: 0 11px;
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            border-left: 2px solid transparent;
+            color: #55534d;
+            font-size: 13px;
+            transition: .2s;
+        }
+
+        .nav-link:hover { background: rgba(23,23,21,.05); color: var(--black); }
+        .nav-link.active { background: var(--black); color: var(--paper); }
+        .nav-icon { width: 18px; text-align: center; }
+        .sidebar-bottom { margin-top: auto; }
+
+        .main-content {
+            width: calc(100% - var(--sidebar-width));
+            min-height: 100vh;
+            margin-left: var(--sidebar-width);
+            padding: 0 55px 70px;
+        }
+
+        .topbar {
+            height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .search-box {
+    width: 370px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.search-icon {
+    color: var(--muted);
+    font-size: 19px;
+}
+
+.search-box input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--black);
+    font-size: 13px;
+}
+
+.search-box input::placeholder {
+    color: #99968d;
+}
+
+.admin-account {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-avatar {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "DM Mono", monospace;
+    font-size: 11px;
+}
+
+.admin-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.admin-info strong {
+    font-size: 12px;
+}
+
+.admin-info span {
+    color: var(--muted);
+    font-family: "DM Mono", monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+/* INTRO — matches the admin dashboard */
+        .page-intro {
+            padding: 58px 0 45px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .section-label {
+            margin-bottom: 11px;
+            color: var(--muted);
+            font-family: "DM Mono", monospace;
+            font-size: 8px;
+            letter-spacing: 1.8px;
+        }
+
+        .page-intro h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(42px, 5vw, 68px);
+            font-weight: 500;
+            line-height: .95;
+            letter-spacing: -2px;
+        }
+
+        .intro-text {
+            max-width: 500px;
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .return-panel {
+            padding: 28px;
+            background: var(--paper);
+            border: 1px solid var(--line);
+        }
+
+        .panel-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .panel-heading h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 26px;
+            font-weight: 500;
+        }
+
+        .panel-note {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .return-form {
+            display: grid;
+            grid-template-columns: minmax(200px, 1fr) auto;
+            align-items: end;
+            gap: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 9px;
+            font: 9px "DM Mono", monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .form-group input {
+            width: 100%;
+            height: 45px;
+            padding: 0 13px;
+            border: 1px solid var(--line);
+            background: #fff;
+            outline: none;
+            font-size: 13px;
+        }
+
+        .form-group input:focus { border-color: var(--black); }
+
+        .primary-button {
+            min-height: 45px;
+            padding: 0 22px;
+            border: 1px solid var(--black);
+            background: var(--black);
+            color: var(--paper);
+            cursor: pointer;
+            font-size: 12px;
+            transition: .2s;
+        }
+
+        .primary-button:hover { background: #393933; }
+        .primary-button:disabled { opacity: .55; cursor: wait; }
+
+        .message {
+            display: none;
+            margin-top: 20px;
+            padding: 14px 16px;
+            border: 1px solid var(--line);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .message.success { display: block; background: #edf1e7; border-color: #c8d2b8; }
+        .message.error { display: block; background: #f6e9e5; border-color: #dfc0b6; }
+
+        .fine-result {
+            display: none;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .fine-result.visible { display: grid; }
+        .result-card { padding: 17px; border: 1px solid var(--line); background: var(--paper); }
+        .result-card span {
+            display: block;
+            color: var(--muted);
+            font: 9px "DM Mono", monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .result-card strong {
+            display: block;
+            margin-top: 10px;
+            font: 500 28px "Playfair Display", serif;
+        }
+
+        .info-panel {
+            margin-top: 20px;
+            padding: 18px 20px;
+            border-left: 2px solid var(--black);
+            background: #ebe7dd;
+        }
+
+        .info-panel strong { font-size: 12px; }
+        .info-panel p { margin-top: 6px; color: #5f5c54; font-size: 12px; line-height: 1.7; }
+
+        .dashboard-footer {
+            margin-top: 55px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--muted);
+            font: 8px "DM Mono", monospace;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 1050px) {
+            :root { --sidebar-width: 300px; }
+            .logo-mark { width: 52px; height: 52px; font-size: 27px; }
+            .library-text { font-size: 17px; }
+            .number-text { font-size: 29px; }
+            .logo { gap: 11px; }
+            .main-content { padding: 0 30px 50px; }
+        }
+
+        @media (max-width: 760px) {
+            .sidebar { position: static; width: 100%; min-height: auto; padding: 20px; }
+            .logo { margin-bottom: 22px; }
+            .logo-mark { width: 44px; height: 44px; font-size: 23px; }
+            .library-text { font-size: 15px; letter-spacing: 1.5px; }
+            .number-text { font-size: 25px; }
+            .logo { margin-bottom: 22px; }
+            .sidebar-nav { display: flex; flex-wrap: wrap; gap: 8px; }
+            .nav-section { margin: 0; }
+            .nav-heading, .sidebar-bottom { display: none; }
+            .nav-link { min-height: 34px; padding: 0 9px; }
+            .main-content { width: 100%; margin: 0; padding: 0 18px 35px; }
+            .topbar { min-height: 70px; }
+            .search-box { width: 55%; }
+            .admin-info { display: none; }
+            .return-form { grid-template-columns: 1fr; }
+            .primary-button { width: 100%; }
+            .page-intro { padding: 38px 0 30px; }
+            .page-intro h1 { font-size: 42px; }
+            .return-panel { padding: 19px; }
+            .dashboard-footer { flex-direction: column; }
+        }
+
+        @media (max-width: 450px) {
+            .page-intro { align-items: flex-start; }
+            .fine-result { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <a href="admin-dashboard.html" class="logo">
+            <div class="logo-mark">L</div>
+            <div class="logo-name">
+                <span class="library-text">LIBRARY</span>
+                <span class="number-text">360</span>
+            </div>
+        </a>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <p class="nav-heading">OVERVIEW</p>
+                <a href="admin-dashboard.html" class="nav-link"><span class="nav-icon">▦</span>Dashboard</a>
+            </div>
+
+            <div class="nav-section">
+                <p class="nav-heading">LIBRARY</p>
+                <a href="findbook admin.html" class="nav-link"><span class="nav-icon">▦</span>Books</a>
+            </div>
+
+            <div class="nav-section">
+                <p class="nav-heading">MANAGEMENT</p>
+                <a href="admin-members.html" class="nav-link"><span class="nav-icon">◎</span>Members</a>
+                <a href="admin-lending.html" class="nav-link"><span class="nav-icon">↗</span>Lending</a>
+                <a href="admin-returns.html" class="nav-link active"><span class="nav-icon">↩</span>Returns</a>
+                <a href="admin-transactions.html" class="nav-link"><span class="nav-icon">≡</span>Transactions</a>
+            </div>
+
+            <div class="nav-section">
+                <p class="nav-heading">INSIGHTS</p>
+                <a href="admin-reports.html" class="nav-link"><span class="nav-icon">▥</span>Reports</a>
+            </div>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p class="nav-heading">SYSTEM</p>
+            
+            <a href="index.html" class="nav-link"><span class="nav-icon">↪</span>Logout</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <label class="search-box">
+                <span>⌕</span>
+                <input type="search" id="pageSearch" placeholder="Search books, members..." aria-label="Search">
+            </label>
+
+            <div class="admin-account">
+                <div class="admin-avatar">A</div>
+                <div class="admin-info">
+                    <strong>Administrator</strong>
+                </div>
+            </div>
+        </header>
+
+        <section class="page-intro">
+            <div>
+                <p class="section-label">MANAGEMENT / RETURNS</p>
+                <h1>Return a Book</h1>
+                <p class="intro-text">Process a book return using its transaction ID.</p>
+            </div>
+        </section>
+
+        <section class="return-panel">
+            <div class="panel-heading">
+                <div>
+                    <h2>Process Return</h2>
+                    <p class="panel-note">Enter the transaction ID from the lending record.</p>
+                </div>
+            </div>
+
+            <form class="return-form" id="returnForm">
+                <div class="form-group">
+                    <label for="transactionId">Transaction ID</label>
+                    <input type="number" id="transactionId" name="transaction_id" min="1" placeholder="Enter transaction ID" required>
+                </div>
+                <button class="primary-button" id="returnButton" type="submit">Confirm Return <span aria-hidden="true">↗</span></button>
+            </form>
+
+            <div class="message" id="responseMessage" role="status" aria-live="polite"></div>
+
+            <div class="fine-result" id="fineResult">
+                <div class="result-card">
+                    <span>Days Late</span>
+                    <strong id="daysLate">—</strong>
+                </div>
+                <div class="result-card">
+                    <span>Fine Amount</span>
+                    <strong id="fineAmount">₹0</strong>
+                </div>
+            </div>
+        </section>
+
+        <footer class="dashboard-footer">
+            <span>LIBRARY 360 — ADMINISTRATION</span>
+            <span>RETURNS MANAGEMENT</span>
+        </footer>
+    </main>
+
+    <script>
+        /*
+          Change this path to the actual location of your PHP return endpoint.
+          Example: "../backend/return_book.php"
+        */
+        const RETURN_ENDPOINT = "../backend/return_book.php";
+
+        const returnForm = document.getElementById("returnForm");
+        const returnButton = document.getElementById("returnButton");
+        const responseMessage = document.getElementById("responseMessage");
+        const fineResult = document.getElementById("fineResult");
+
+        returnForm.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const transactionId = document.getElementById("transactionId").value.trim();
+
+            if (!transactionId) {
+                showMessage("Enter a transaction ID first.", "error");
+                return;
+            }
+
+            returnButton.disabled = true;
+            returnButton.textContent = "Processing...";
+            responseMessage.className = "message";
+            responseMessage.textContent = "";
+            fineResult.classList.remove("visible");
+
+            try {
+                const formData = new FormData();
+                formData.append("transaction_id", transactionId);
+
+                const response = await fetch(RETURN_ENDPOINT, {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    showMessage(result.message || "Unable to process this return.", "error");
+                    return;
+                }
+
+                const daysLate = Number(result.data?.days_late ?? 0);
+                const fine = Number(result.data?.fine ?? 0);
+
+                showMessage(result.message || "Book returned successfully.", "success");
+                document.getElementById("daysLate").textContent = daysLate;
+                document.getElementById("fineAmount").textContent = "₹" + fine.toFixed(2);
+                fineResult.classList.add("visible");
+                returnForm.reset();
+            } catch (error) {
+                showMessage("Could not connect to the server. Check the PHP endpoint path and make sure the site is running through a PHP server.", "error");
+            } finally {
+                returnButton.disabled = false;
+                returnButton.innerHTML = 'Confirm Return <span aria-hidden="true">↗</span>';
+            }
+        });
+
+        function showMessage(message, type) {
+            responseMessage.textContent = message;
+            responseMessage.className = "message " + type;
+        }
+
+        document.getElementById("pageSearch").addEventListener("input", function () {
+            const query = this.value.trim();
+            if (query) {
+                showMessage("Use the Transaction ID field below to process a specific return. This page does not load or display transaction records.", "error");
+            } else {
+                responseMessage.className = "message";
+                responseMessage.textContent = "";
+            }
+        });
+    </script>
+</body>
+</html>

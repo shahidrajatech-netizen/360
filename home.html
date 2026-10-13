@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>LIBRARY360</title>
+
+    <style>
+      body {
+        margin: 0;
+        background: #f3f0e8;
+        color: #171715;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        border-bottom: 1px solid #d9d5ca;
+      }
+
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #171715;
+      }
+
+      .logo-mark {
+        width: 44px;
+        height: 44px;
+        border: 1px solid #171715;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Playfair Display", serif;
+        font-size: 23px;
+        font-weight: 600;
+      }
+
+      .logo-name {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+
+      .library-text,
+      .number-text {
+        font-family: "Poppins", sans-serif;
+        color: #171715;
+        letter-spacing: 1px;
+      }
+
+      .library-text {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .number-text {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .nav-links a {
+        color: #171715;
+        text-decoration: none;
+        margin-left: 30px;
+        font-size: 14px;
+        opacity: 0.8;
+      }
+
+      .nav-links a:hover {
+        opacity: 1;
+      }
+
+      /* HERO WITH BACKGROUND */
+      .hero {
+        text-align: center;
+        padding: 120px 20px 80px;
+        background: black;
+      }
+
+      .quote {
+        font-family: "Playfair Display", serif;
+        font-size: 42px;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: auto;
+        color: #fdf9f9;
+      }
+
+      .sub {
+        margin-top: 15px;
+        font-size: 14px;
+        letter-spacing: 2px;
+        color: #000000;
+      }
+
+      .section {
+        padding: 50px;
+      }
+
+      .section h2 {
+        margin-bottom: 25px;
+        font-family: "Playfair Display", serif;
+      }
+
+      .books {
+        display: flex;
+        gap: 25px;
+        flex-wrap: wrap;
+      }
+
+      .book {
+        width: 160px;
+        transition: 0.3s;
+      }
+
+      .book:hover {
+        transform: translateY(-8px);
+      }
+
+      .book img {
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+        border-radius: 0;
+      }
+
+      .book p {
+        margin: 8px 0 2px;
+        font-size: 14px;
+      }
+
+      .book small {
+        color: #000000;
+      }
+
+      .categories {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+      }
+
+      .category {
+        background: #ebe7dd;
+        padding: 25px;
+        border: 1px solid #d9d5ca;
+        border-radius: 0;
+        text-align: center;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+
+      .category:hover {
+        background: #171715;
+        color: #f3f0e8;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="navbar">
+      <a href="home.html" class="logo">
+        <div class="logo-mark">L</div>
+        <div class="logo-name">
+          <span class="library-text">LIBRARY</span>
+          <span class="number-text">360</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="findbook.html">Find Books</a>
+        <a href="login.html">Login</a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="quote">
+        “A reader lives a thousand lives before he dies… The one who never reads
+        lives only one.”
+      </div>
+      <div class="sub">READ • LEARN • GROW</div>
+    </div>
+
+    <div class="section">
+      <h2>Famous Books</h2>
+
+      <div class="books">
+        <div class="book">
+          <img
+            src="https://covers.openlibrary.org/b/id/7984916-L.jpg"
+            alt="Harry Potter book cover"
+          />
+          <p>Harry Potter</p>
+          <small>J.K. Rowling</small>
+        </div>
+
+        <div class="book">
+          <img
+            src="https://covers.openlibrary.org/b/id/8228691-L.jpg"
+            alt="The Alchemist book cover"
+          />
+          <p>The Alchemist</p>
+          <small>Paulo Coelho</small>
+        </div>
+
+        <div class="book">
+          <img
+            src="https://covers.openlibrary.org/b/id/11153231-L.jpg"
+            alt="Clean Code book cover"
+          />
+          <p>Clean Code</p>
+          <small>Robert C. Martin</small>
+        </div>
+
+        <div class="book">
+          <img
+            src="https://covers.openlibrary.org/b/id/240726-L.jpg"
+            alt="Atomic Habits book cover"
+          />
+          <p>Atomic Habits</p>
+          <small>James Clear</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Categories</h2>
+
+      <div class="categories">
+        <div class="category">Fiction & Stories</div>
+        <div class="category">Art & Design</div>
+        <div class="category">Science</div>
+        <div class="category">Academic & Textbooks</div>
+        <div class="category">Technology & CS</div>
+        <div class="category">History & Biography</div>
+        <div class="category">Self-Help & Motivation</div>
+      </div>
+    </div>
+  </body>
+</html>

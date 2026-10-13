@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>LOGIN</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Playfair Display", serif;
+      }
+
+      body {
+        margin: 0;
+        background: url("bg.jpg") no-repeat center/cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        top: 0;
+        left: 0;
+      }
+
+      .container {
+        position: relative;
+        padding: 30px;
+        border-radius: 10px;
+        background: white;
+        width: 400px;
+        text-align: center;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        text-align: left;
+        font-size: 13px;
+        margin-top: 6px;
+      }
+
+      input,
+      button,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin: 6px 0;
+        border: 1px solid black;
+        background: white;
+        font-size: 14px;
+      }
+
+      .select-box {
+        position: relative;
+      }
+
+      select {
+        appearance: none;
+      }
+
+      .select-box::after {
+        content: "▼";
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        font-size: 12px;
+      }
+
+      button {
+        background: black;
+        color: white;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: white;
+        color: black;
+      }
+
+      .links {
+        margin-top: 12px;
+      }
+
+      .links a {
+        color: #0066cc;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 14px;
+      }
+
+      .links a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>LOGIN</h1>
+
+      <form onsubmit="return redirectUser();">
+        <label for="role">Select Role</label>
+        <div class="select-box">
+          <select id="role" name="role" required>
+            <option value="">Choose Role</option>
+            <option value="Student">Student</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+
+        <label for="user-id">ID</label>
+        <input
+          id="user-id"
+          name="userId"
+          type="text"
+          placeholder="Enter your ID"
+          required
+        />
+
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Enter Password"
+          required
+        />
+
+        <button type="submit">Login</button>
+      </form>
+
+      <div class="links">
+        <a href="singup.php">Sign Up</a>
+        <a href="forgot.html">Forgot Password?</a>
+      </div>
+    </div>
+    <script>
+      function redirectUser() {
+        var role = document.querySelector("select").value;
+
+        if (role === "Student") {
+          window.location.href = "student_dashboard.html";
+        } else if (role === "Admin") {
+          window.location.href = "admin_dashboard.html";
+        } else {
+          alert("Please select a role");
+        }
+
+        return false;
+      }
+    </script>
+  </body>
+</html>

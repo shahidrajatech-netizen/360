@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Books - Library360</title>
+
+   
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f3f0e8;
+            color: #171715;
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .topbar {
+            height: 82px;
+            display: flex;
+            align-items: center;
+            padding: 0 55px;
+            background: #f3f0e8;
+            border-bottom: 1px solid #d9d5ca;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            text-decoration: none;
+            color: #171715;
+        }
+
+        .logo-mark {
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
+            border: 1.5px solid #171715;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Playfair Display", serif;
+            font-size: 23px;
+            font-weight: 600;
+        }
+
+        .logo-name {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 5px;
+            white-space: nowrap;
+            line-height: 1;
+        }
+        .top-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 25px 50px;
+    box-sizing: border-box;
+}
+
+/* Logo stays on the left */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+/* HOME goes to the right */
+.home-btn {
+    margin-left: auto;
+
+    text-decoration: none;
+    color: #171715;
+    border: 1px solid #171715;
+
+    padding: 10px 22px;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+
+    transition: 0.2s ease;
+}
+
+.home-btn:hover {
+    background: #171715;
+    color: #f3f0e8;
+}
+
+        .library-text {
+            font-family: "DM Sans", sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #171715;
+        }
+
+        .number-text {
+            font-family: "DM Sans", sans-serif;
+            font-size: 27px;
+            font-weight: 700;
+            color: #171715;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px 45px;
+            background: #f3f0e8;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-family: "Playfair Display", serif;
+            font-size: 48px;
+            font-weight: 500;
+            color: #171715;
+        }
+
+        .hero p {
+            margin: 12px 0 0;
+            color: #77736a;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto 70px;
+        }
+
+        .search-section {
+            background: #fffdf8;
+            border: 1px solid #d9d5ca;
+            padding: 34px;
+            margin-bottom: 28px;
+        }
+
+        .search-title {
+            font-family: "Playfair Display", serif;
+            font-size: 25px;
+            margin-bottom: 20px;
+            color: #171715;
+        }
+
+        .search-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 120px;
+            gap: 15px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            height: 45px;
+            padding: 10px 12px;
+            font-family: "Poppins", sans-serif;
+            font-size: 13px;
+            border: 1px solid #555;
+            outline: none;
+        }
+
+        input,
+        select {
+            background: #fff;
+            color: #171715;
+            border: 1px solid #bcb8ae;
+        }
+
+        input:focus,
+        select:focus {
+            border: 1.5px solid #171715;
+        }
+
+        button {
+            background: #171715;
+            color: #fff;
+            border: 1px solid #171715;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #33332f;
+        }
+
+        .books-section {
+            background: #fffdf8;
+            border: 1px solid #d9d5ca;
+            padding: 28px;
+            overflow-x: auto;
+        }
+
+        .books-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .books-header h2 {
+            margin: 0;
+            font-family: "Playfair Display", serif;
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .books-header span {
+            color: #77736a;
+            font-size: 13px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th,
+        td {
+            padding: 15px 12px;
+            border-bottom: 1px solid #ddd8cc;
+            text-align: left;
+        }
+
+        th {
+            background: #171715;
+            color: #fff;
+            font-family: "Playfair Display", serif;
+            font-weight: 600;
+        }
+
+        td {
+            color: #4f4d47;
+            font-size: 13px;
+        }
+
+        tr:hover td {
+            background: #f3f0e8;
+        }
+
+        .available {
+            color: #8fd694;
+            font-weight: bold;
+        }
+
+        .unavailable {
+            color: #ff8585;
+            font-weight: bold;
+        }
+
+        .details {
+            color: #171715;
+            text-decoration: none;
+            border-bottom: 1px solid #171715;
+        }
+
+        .details:hover {
+            opacity: 0.7;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 35px;
+            color: #8a867d;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid #d9d5ca;
+            color: #77736a;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 900px) {
+            .topbar {
+                height: 72px;
+                padding: 0 20px;
+            }
+
+            .search-row {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .container {
+                width: 94%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<header class="top-header">
+
+    <!-- Logo -->
+    <a href="student_dashboard.html" class="logo">
+        <div class="logo-mark">L</div>
+
+        <div class="logo-name">
+            <span class="library-text">LIBRARY</span>
+            <span class="number-text">360</span>
+        </div>
+    </a>
+
+        
+    <a href="admin_dashboard.html" class="home-btn">HOME</a>
+
+</header>
+
+
+<div class="hero">
+
+    <h1>Find Books</h1>
+
+    <p>SEARCH • EXPLORE • DISCOVER</p>
+
+</div>
+
+<div class="container">
+
+    <div class="search-section">
+
+        <div class="search-title">Search Library</div>
+
+        <form action="find_books.php" method="GET">
+
+            <div class="search-row">
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search by title, author or ISBN"
+                >
+
+                <select name="category_id">
+                    <option value="">All Categories</option>
+                    <option value="1">Fiction &amp; Stories</option>
+                    <option value="2">Art &amp; Design</option>
+                    <option value="3">Science</option>
+                    <option value="4">Academic &amp; Textbooks</option>
+                    <option value="5">Technology &amp; Computer Science</option>
+                    <option value="6">History &amp; Biography</option>
+                    <option value="7">Self-Help &amp; Motivation</option>
+                </select>
+
+                <select name="availability">
+                    <option value="">All Books</option>
+                    <option value="available">Available</option>
+                    <option value="unavailable">Unavailable</option>
+                </select>
+
+                <button type="submit">Search</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="books-section">
+
+        <div class="books-header">
+            <h2>Books</h2>
+            <span>Library Collection</span>
+        </div>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Category</th>
+                    <th>Available Quantity</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td colspan="6" class="no-results">
+                        Books will appear here from the database.
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<footer>
+    LIBRARY360 • READ • LEARN • GROW
+</footer>
+
+</body>
+</html>

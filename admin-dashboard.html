@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | LIBRARY 360</title>
+
+    
+
+    
+
+    
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    
+
+    <aside class="sidebar">
+
+        <a href="admin-dashboard.html" class="logo">
+
+            <div class="logo-mark">L</div>
+
+            <div class="logo-name">
+                <span class="library-text">LIBRARY</span>
+                <span class="number-text">360</span>
+            </div>
+
+        </a>
+
+
+        <nav class="sidebar-nav">
+
+            
+            <div class="nav-section">
+
+                <p class="nav-heading">OVERVIEW</p>
+
+                <a href="admin-dashboard.html"
+                   class="nav-link active">
+
+                    <span class="nav-icon">▦</span>
+                    <span>Dashboard</span>
+
+                </a>
+
+            </div>
+
+
+            <!-- LIBRARY -->
+            <div class="nav-section">
+
+                <p class="nav-heading">LIBRARY</p>
+
+                <a href="admin-books.html"
+                   class="nav-link">
+
+                    <span class="nav-icon">▦</span>
+                    <span>Books</span>
+
+                </a>
+
+
+                
+
+            </div>
+
+
+            
+            <div class="nav-section">
+
+                <p class="nav-heading">MANAGEMENT</p>
+
+                <a href="admin-members.html"
+                   class="nav-link">
+
+                    <span class="nav-icon">◎</span>
+                    <span>Members</span>
+
+                </a>
+
+
+                <a href="admin-lending.html"
+                   class="nav-link">
+
+                    <span class="nav-icon">↗</span>
+                    <span>Lending</span>
+
+                </a>
+
+
+                <a href="admin-returns.html"
+                   class="nav-link">
+
+                    <span class="nav-icon">↩</span>
+                    <span>Returns</span>
+
+                </a>
+
+
+                <a href="admin-transactions.html"
+                   class="nav-link">
+
+                    <span class="nav-icon">≡</span>
+                    <span>Transactions</span>
+
+                </a>
+
+            </div>
+
+
+            
+            <div class="nav-section">
+
+                <p class="nav-heading">INSIGHTS</p>
+
+                <a href="admin-reports.html"
+                   class="nav-link">
+
+                    <span class="nav-icon">▥</span>
+                    <span>Reports</span>
+
+                </a>
+
+
+                
+
+            </div>
+
+        </nav>
+
+
+        
+        <div class="sidebar-bottom">
+
+            <p class="nav-heading">SYSTEM</p>
+
+            <a href="admin-settings.html"
+               class="nav-link">
+
+                <span class="nav-icon">⚙</span>
+                <span>Settings</span>
+
+            </a>
+
+
+            <a href="index.html"
+               class="nav-link logout">
+
+                <span class="nav-icon">↪</span>
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    
+
+    <main class="main-content">
+
+
+        
+
+        <header class="topbar">
+
+            <div class="search-box">
+
+                <span class="search-icon">⌕</span>
+
+                <input
+                    type="search"
+                    placeholder="Search books, members..."
+                    aria-label="Search">
+
+            </div>
+
+
+            <div class="admin-account">
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+                <div class="admin-info">
+
+                    <strong>Administrator</strong>
+
+                    
+
+                </div>
+
+               
+
+            </div>
+
+        </header>
+
+
+
+        <
+
+        <section class="page-intro">
+
+            <div>
+
+                <p class="section-label">
+                    ADMIN PORTAL
+                </p>
+
+                <h1>
+                    Librarian
+                </h1>
+
+                <p class="intro-text">
+                    Manage your library, monitor circulation,
+                    members and daily operations from one place.
+                </p>
+
+            </div>
+
+
+
+        </section>
+
+
+
+        
+
+        <section class="stats-grid">
+
+
+
+
+
+         
+
+
+            
+
+        </section>
+
+
+
+    
+
+        <section class="dashboard-grid">
+
+
+
+            <div class="panel lending-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <p class="section-label">
+                            ACTIVITY
+                        </p>
+
+                        <h2>
+                            Recent Lending
+                        </h2>
+
+                    </div>
+
+
+                    <a href="admin-lending.html"
+                       class="text-link">
+
+                        VIEW ALL →
+
+                    </a>
+
+                </div>
+
+
+
+
+
+
+
+           
+
+
+        </section>
+
+
+        <section class="lower-grid">
+
+
+        
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <p class="section-label">
+                            REQUESTS
+                        </p>
+
+                        <h2>
+                            Book Requests
+                        </h2>
+
+                    </div>
+
+
+                    <a href="admin-transactions.html"
+                       class="text-link">
+
+                        VIEW ALL →
+
+                    </a>
+
+                </div>
+
+
+
+
+    
+
+          <div class="quick-grid">
+
+    <a href="admin-books.html" class="quick-card">
+
+        <div>
+
+            <h3>
+                Manage Books
+            </h3>
+
+            <p>
+                Add, edit or remove books.
+            </p>
+
+        </div>
+
+        <strong>↗</strong>
+
+    </a>
+
+
+    <a href="admin-members.html" class="quick-card">
+
+        <div>
+
+            <h3>
+                Manage Members
+            </h3>
+
+            <p>
+                View and manage library members.
+            </p>
+
+        </div>
+
+        <strong>↗</strong>
+
+    </a>
+
+
+    <a href="admin-lending.html" class="quick-card">
+
+        <div>
+
+            <h3>
+                Issue Books
+            </h3>
+
+            <p>
+                Issue books and create lending records.
+            </p>
+
+        </div>
+
+        <strong>↗</strong>
+
+    </a>
+
+
+    <a href="admin-returns.html" class="quick-card">
+
+        <div>
+
+            <h3>
+                Process Returns
+            </h3>
+
+            <p>
+                Record and manage returned books.
+            </p>
+
+        </div>
+
+        <strong>↗</strong>
+
+    </a>
+
+</div>
+
+        </section>
+
+
+
+       
+
+        
+
+
+
+    </main>
+
+</div>
+
+</body>
+</html>
